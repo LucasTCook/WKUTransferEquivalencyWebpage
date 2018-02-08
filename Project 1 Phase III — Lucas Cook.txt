@@ -1,0 +1,72 @@
+Project 1 Phase III ———— Lucas Cook
+
+Web Server - Apache
+Scripting - OO PHP
+Front-End - JavaScript, HTML, JQuery
+
+
+In this part of the project I continued to use in-line AWK scripts to scrape the course data from raw .txt files copied from the page’s source code. After I completed the scraping I extended my previous database to now include the following tables:
+
+
+
+Schools
+Courses
+wkuCourses
+Review
+
+
+
+Schools(ID, Name, City, State)
+
+- ID is a unique hashed value (Key)
+- Name is the name of the school
+- City is the city the school belongs to
+- State is the State or Country in which the school is located
+
+
+
+Courses(ID, SchoolID, Number, Title, Hours, Equivalent, Review)
+ 
+- ID is a unique hashed value (Key)
+- SchoolID is the ID of the school that the course belongs to (Foreign Key)
+- Number is the abbreviation of the course
+- Title is the full name of the course
+- Hours is how many credit hours the course is worth at its belonging school
+- Equivalent is the ID of the wkuCourse of which it is equivalent (Foreign Key)
+- Review is the ID of the Review that was performed on this course (Foreign Key)
+
+
+
+wkuCourses(ID, Number, Title, Hours, AndOr, GenEd, Colonnade)
+ 
+- ID is a unique hashed value (Key)
+- Number is the abbreviation of the course
+- Title is the full name of the course
+- Hours is the number of hours the course is worth at WKU
+- AndOr is whether or not the course covers multiple courses
+- GenEd is the General Education requirement that it fulfills
+- Colonnade is the Colonnade General Education requirement that it fulfills
+
+
+
+Review(ID, TransferCourse, WKUCourse, Status, TimeOfDecision, Comments)
+
+- ID is a unique hashed value (Key)
+- TransferCourse is the ID of the Course that is under review (Foreign Key)
+- WKUCourse is the ID of the wkuCourse that is being reviewed to the above Course (Foreign Key) 
+- Status is an integer that described the decision or current status of the review
+	- 0 = Under Review / Not Yet Reviewed
+	- (-1) = Declined Transfer Equivalency
+	- 1 Approved Transfer Equivalency
+- TimeOfDecision is a timestamp in EPOCH time that the Status was changed
+- Comments is a string of any of the reviewer’s comments
+
+(It is also possible to add the reviewers ID to a “Reviewer” column if that was available to us)
+
+
+
+Using Object Oriented PHP makes dealing with the database very simple since every row is just an object. With proper normalization of data across each table I was able to pull all of the linked information I needed to complete the project. Contained in this .zip is a copy of my source code. The object files show exactly how my database is set up.
+
+
+
+
